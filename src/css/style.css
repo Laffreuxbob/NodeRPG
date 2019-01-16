@@ -1,0 +1,131 @@
+html{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background-image: url("../img/login-background.jpg");
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+body{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%
+}
+.loginContent {
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 3%;
+    height: 500px;
+    width: 460px;
+    display: flex;
+    flex-direction: column;
+}
+.inputLoginContent {
+    flex: 70%;
+}
+.titleLogin{
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 40px;
+}
+.inputLogin{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.inputLogin div{
+    height: 50px;
+    display: flex;
+    margin-top:10px;
+    margin-left:40px;
+    margin-right:40px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 15px;
+    padding-left: 10px;
+    background-color: white;
+}
+.inputLogin div input{
+    align-items: center;
+    font-size: x-large;
+    height: 40px;
+    width: 90%;
+    border: none;
+    border-radius: 15px;
+    padding-left: 5px;
+    background-color: white;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.inputLogin div input:focus{
+    outline:  none;
+}
+
+.loginButtonContent {
+    display: flex;
+    flex: 30%;
+    align-self: center;
+    width: 100%;
+}
+.loginButton {
+    align-self: center;
+    width: 100%;
+    padding-left: 40px;
+    padding-right: 40px;
+    align-content: center;
+    display: flex;
+}
+.sword {
+    transform: rotate(180deg);
+}
+.iconLog{
+    font-size: 40px;
+    height: 40px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.feuille{
+    position: absolute;
+    top: 300px;
+}
+.buttonLogin {
+    color: white;
+    background:#2E8CA6;
+    border: none;
+    height: 60px;
+    border-radius: 15px;
+    width: 100%;
+    font-size:xx-large;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+.subscribeButton{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.logButton{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.buttonLogin:hover{
+    background-color: rgba(46, 140, 166, 0.733);
+}
+.buttonLogin:active{
+    background-color: rgb(46, 129, 168);
+}
+.buttonLogin:focus{
+    outline:  none;
+}
+
+.imgClass{
+    display: flex;
+    margin-top: -75px;
+}
+
+.imgClass img {
+    height:150px;
+    width:150px;
+    margin-left: auto;
+    margin-right: auto;
+}
