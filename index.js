@@ -38,6 +38,32 @@ server.get('/version', (req, res) => {
     res.send(JSON.stringify(pkg.version));  
 })
 
+// Method POST add new warrior
+server.post('/add',  (req, res) => {
+    const data = req.body    // recuperation des donnees dans le body de la requete
+    // attribution des nouvelles key_value  
+    let newName = data.name || "default_name"; 
+    let newFirstname = data.newFirstname || "firstName";
+    let newPromo = data.promo || "default_promo";
+    
+    // creation du nouvel objet tache 
+    let newWarrior = {
+        "breed":newName,
+        "name":newFirstname,
+        "hp":newPromo,
+        "strength": 2,
+        "itemPoints": 10,
+    };
+  
+    let query = "INSERT INTO students (nom, prenom, promo) \
+    VALUES (" + newStudent.name + "," + newStudent.firstname + "," + newStudent.promo + ";)"
+    connection.query(query, function (err, results, fields) {
+      if (err) throw err;
+      console.log("Success add");
+      res.status(200)
+    })
+  });
+
 server.listen(conf.port, conf.hostname, function() {   
     console.log('Server running at http://' + conf.hostname + ':' + conf.port + '/');
   });
