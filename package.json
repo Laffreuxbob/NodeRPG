@@ -1,0 +1,25 @@
+{
+  "name": "noderpg",
+  "version": "1.0.0",
+  "description": "Simple RPG with NodeJS server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LaffreuxBob/NodeRPG.git"
+  },
+  "author": "Jeremie Bellanger, Olivier Bricaud",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LaffreuxBob/NodeRPG/issues"
+  },
+  "homepage": "https://github.com/LaffreuxBob/NodeRPG#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mysql": "^2.16.0",
+    "nodemon": "^1.18.9"
+  }
+}
