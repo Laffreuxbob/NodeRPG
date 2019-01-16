@@ -38,6 +38,34 @@ server.get('/version', (req, res) => {
     res.send(JSON.stringify(pkg.version));  
 })
 
+// Methode GET login
+server.get('/login', function (req, res) {
+    const sql = "SELECT * FROM users WHERE login = " + req.login + "AND password = " + req.password
+    connection.query(sql, function (err, results, fields) {
+        if (err) throw err;
+        if(!results){
+            //pas de connexion
+        }else{
+            res.sendFile(__dirname + '/index.html'); // page d'accueil
+        }
+    });
+    connection.end();
+})
+
+// Methode GET liste des personnage enregistrés
+server.get('/listWarrior', function (req, res) {
+    const sql = "SELECT * FROM warrior WHERE user = " + req.user;
+    connection.query(sql, function (err, results, fields) {
+        if (err) throw err;
+        if(!results){
+            //pas de personnage disponible
+        }else{
+            res.send(results); // afficher la liste des personnage disponible
+        }
+    });
+    connection.end();
+})
+
 // Method POST add new warrior
 server.post('/add',  (req, res) => {
     const data = req.body    // recuperation des donnees dans le body de la requete
@@ -54,16 +82,16 @@ server.post('/add',  (req, res) => {
         "strength": 2,
         "itemPoints": 10,
     };
-  
+    
     let query = "INSERT INTO students (nom, prenom, promo) \
     VALUES (" + newStudent.name + "," + newStudent.firstname + "," + newStudent.promo + ";)"
     connection.query(query, function (err, results, fields) {
-      if (err) throw err;
-      console.log("Success add");
-      res.status(200)
+        if (err) throw err;
+        console.log("Success add");
+        res.status(200)
     })
-  });
+});
 
 server.listen(conf.port, conf.hostname, function() {   
     console.log('Server running at http://' + conf.hostname + ':' + conf.port + '/');
-  });
+});
