@@ -52,8 +52,8 @@ server.get('/login', function (req, res) {
     connection.end();
 })
 
-// Methode GET liste des personnage enregistrés
-server.get('/listWarrior', function (req, res) {
+// Methode GET liste des personnages enregistrés
+server.get('/listWarriors', function (req, res) {
     const sql = "SELECT * FROM warrior WHERE user = " + req.user;
     connection.query(sql, function (err, results, fields) {
         if (err) throw err;
