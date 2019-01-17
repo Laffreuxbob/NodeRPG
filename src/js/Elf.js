@@ -1,3 +1,5 @@
+const Warrior = require('./Warrior.js');
+
 class Elf extends Warrior{
     constructor(name, user){
         super(name, user);
@@ -27,4 +29,6 @@ class Elf extends Warrior{
             this.strength += weapon.addStrength;
         }
     }
-}
+};
+
+module.exports = Elf;

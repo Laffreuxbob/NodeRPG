@@ -1,3 +1,5 @@
+const Warrior = require('./Warrior.js');
+
 class Human extends Warrior{
     constructor(name, user){
         super(name, user);
@@ -49,3 +51,5 @@ class Human extends Warrior{
         }
     }
 }
+
+module.exports = Human;
