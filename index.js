@@ -7,9 +7,19 @@ const conf = require('./utils/config.js')
 const pkg = require('./package.json'); // Pour pouvoir lire les data du package.json
 const sha1 = require('sha1');
 
+const Elf = require('./src/js/Elf.js')
+const Human = require('./src/js/Human.js')
+
+let elf1 = new Elf("testelf")
+console.log(elf1)
+let h1 = new Human("testelf")
+console.log("-------------",h1)
+h1.usePotion()
+console.log("-------------",h1)
+
+
 const bodyPost = require('body-parser'); // Necessaire a la lecture des data dans le body des requetes (post)
-const server = express();
-const io = require('socket.io').listen(server); // Pour que socketio écoute notre serveur
+//const io = require('socket.io').listen(server); // Pour que socketio écoute notre serveur
 
 server.use(bodyPost.json()); // support json encoded bodies
 server.use(bodyPost.urlencoded({ extended: false })); // support encoded bodies
@@ -215,8 +225,8 @@ server.post('/addWarrior',  (req, res) => {
         newWarriorObject = new Elf(newWarrior.name, newWarrior.user)
     }
     
-    let query = "INSERT INTO warrior (breed, name, hp, strength, healingItem, dodgingChance, weaponEquiped, user) \
-    VALUES ('" + newBreed + "','" + newName + "');"
+    let query = "INSERT INTO warriors (breed, name, hp, strength, healingItem, dodgingChance, weaponEquiped, user) \
+    VALUES ('" + newBreed + "','" + newName + "','50','50','2','0.2','cleaver','bob');"
     connection.query(query, function (err, results, fields) {
         if (err) throw err;
         console.log("Success add");
@@ -225,18 +235,18 @@ server.post('/addWarrior',  (req, res) => {
     })
 });
 
-io.sockets.on('connection',function(socket, player){
+// io.sockets.on('connection',function(socket, player){
 
-    socket.on('new_player', function(player){
-        socket.player = player;
-        socket.broadcast.emit('new_player', player);
-    });
+//     socket.on('new_player', function(player){
+//         socket.player = player;
+//         socket.broadcast.emit('new_player', player);
+//     });
 
-    socket.on('dammage', function(dammage){
-        socket.broadcast.emit('dammage', {player : socket.player, dammage: dammage})
-    });
+//     socket.on('dammage', function(dammage){
+//         socket.broadcast.emit('dammage', {player : socket.player, dammage: dammage})
+//     });
 
-});
+// });
 
 server.listen(conf.port, conf.hostname, function() {   
     console.log('Server running at http://' + conf.hostname + ':' + conf.port + '/');
