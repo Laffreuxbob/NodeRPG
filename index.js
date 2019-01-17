@@ -60,14 +60,6 @@ server.get('/allUsers', (req, res) => {
     })
 })
 
-/*function isEmpty(obj) {
-    for(var key in obj) {
-        if(obj.hasOwnProperty(key))
-            return false;
-    }
-    return true;
-}*/
-
 // ------------------------------------------------CRUD USERS
 // Method POST add new user
 // curl -X POST -H "Content-Type: application/json" -d '{"newLogin":"NouveauProjet", "newPassword":"25-09-2019"}' http://localhost:3000/addUser
@@ -168,35 +160,45 @@ server.get('/selectWarrior/:warriorSelect', function (req, res) {
 })
 
 // Method POST add new warrior
-server.post('/add',  (req, res) => {
+server.post('/addWarrior',  (req, res) => {
     const data = req.body    // recuperation des donnees dans le body de la requete
     let newBreed = data.newBreed || "default_breed"; 
     let newName = data.newName || "default_name"; 
-    let newWeaponType = data.newWeaponType || "sword";
+    let newHp = data.newHp || 200;
+    let newStrength = data.newStrength || 10;
     let newHealingItem = data.newHealingItem || 0;
-    
+    let newDodgingChance = data.newDodgingChance || 0;
+    let newWeaponType = data.newWeaponType || "sword";
+    let newWarriorUser = data.newWarriorUser || "bob";
     // creation du nouvel objet tache 
     let newWarrior = {
         "breed":newBreed,
         "name":newName,
-        "hp":200,
-        "strength": 2,
+        "hp":newHp,
+        "strength": newStrength,
+        "dodgingChance": newDodgingChance,
+        "healingItem": newHealingItem,
         "itemPoints": 10,
-        "weapon": newWeaponType
+        "weapon": newWeaponType,
+        "user": newWarriorUser
     };
 
+    let newWarriorObject;
     switch(newBreed){
         case "human":
-        let newWarriorObject = new Human(newName)
-        console.log(newWarriorObject)
+        newWarriorObject = new Human(newWarrior.name, newWarrior.user)
+        break;
+        case "elf":
+        newWarriorObject = new Elf(newWarrior.name, newWarrior.user)
     }
 
-    let query = "INSERT INTO warrior (breed, name, hp, strength, healingItem, dodgingChance, weaponEquiped) \
+    let query = "INSERT INTO warrior (breed, name, hp, strength, healingItem, dodgingChance, weaponEquiped, user) \
     VALUES ('" + newBreed + "','" + newName + "');"
     connection.query(query, function (err, results, fields) {
         if (err) throw err;
         console.log("Success add");
         res.status(200)
+        res.send(newWarriorObject)
     })
 });
 
