@@ -1,0 +1,104 @@
+html {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-image: url("../img/login-background.jpg");
+  background-size: 100% 100%;
+  overflow: hidden; }
+  html body {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%; }
+
+.loginContent {
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3%;
+  height: 500px;
+  width: 460px;
+  display: flex;
+  flex-direction: column; }
+  .loginContent .inputLoginContent {
+    flex: 70%; }
+    .loginContent .inputLoginContent .imgClass {
+      display: flex;
+      margin-top: -75px; }
+      .loginContent .inputLoginContent .imgClass img {
+        height: 150px;
+        width: 150px;
+        margin-left: auto;
+        margin-right: auto; }
+    .loginContent .inputLoginContent .titleLogin {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 40px; }
+    .loginContent .inputLoginContent .inputLogin {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around; }
+      .loginContent .inputLoginContent .inputLogin div {
+        height: 50px;
+        display: flex;
+        margin-top: 10px;
+        margin-left: 40px;
+        margin-right: 40px;
+        margin-bottom: 15px;
+        border: none;
+        border-radius: 15px;
+        padding-left: 10px;
+        background-color: white; }
+        .loginContent .inputLoginContent .inputLogin div input {
+          align-items: center;
+          font-size: x-large;
+          height: 40px;
+          width: 90%;
+          border: none;
+          border-radius: 15px;
+          padding-left: 5px;
+          background-color: white;
+          margin-top: auto;
+          margin-bottom: auto; }
+          .loginContent .inputLoginContent .inputLogin div input:focus {
+            outline: none !important; }
+        .loginContent .inputLoginContent .inputLogin div .sword {
+          transform: rotate(180deg); }
+        .loginContent .inputLoginContent .inputLogin div .iconLog {
+          font-size: 40px;
+          height: 40px;
+          margin-top: auto;
+          margin-bottom: auto; }
+  .loginContent .loginButtonContent {
+    display: flex;
+    flex: 30%;
+    align-self: center;
+    width: 100%; }
+    .loginContent .loginButtonContent .loginButton {
+      align-self: center;
+      width: 100%;
+      padding-left: 40px;
+      padding-right: 40px;
+      align-content: center;
+      display: flex; }
+      .loginContent .loginButtonContent .loginButton .buttonLogin {
+        color: white;
+        background: #2e8ca6;
+        border: none;
+        height: 60px;
+        border-radius: 15px;
+        width: 100%;
+        font-size: xx-large;
+        margin-bottom: 30px;
+        cursor: pointer; }
+        .loginContent .loginButtonContent .loginButton .buttonLogin:hover {
+          background-color: rgba(46, 140, 166, 0.733); }
+        .loginContent .loginButtonContent .loginButton .buttonLogin:active {
+          background-color: #2e81a8; }
+        .loginContent .loginButtonContent .loginButton .buttonLogin:focus {
+          outline: none; }
+      .loginContent .loginButtonContent .loginButton .subscribeButton {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0; }
+      .loginContent .loginButtonContent .loginButton .logButton {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0; }
