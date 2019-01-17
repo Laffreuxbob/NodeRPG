@@ -17,4 +17,7 @@ class Warrior {
     increaseStrength(value){
       this.strength += value;
     }
-  }
+  };
+
+  module.exports = Warrior
+
