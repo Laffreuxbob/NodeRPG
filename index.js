@@ -139,7 +139,20 @@ server.get('/login', function (req, res) {
     connection.end();
 })
 
-
+server.get('/test/:log/:psd', (req, res) => {
+    const {
+        params: {
+            log,
+            psd
+        }
+    } = req
+    const sql = "SELECT * FROM users WHERE 'login' = '" + log + "' AND 'password' = '" + sha1(psd) + "';";
+    console.log("SQL => ", sql)
+    connection.query(sql, (err, results, fields) => {
+        if (err) throw err;
+        
+    })
+})
 // ------------------------------------------------CRUD WARRIORS
 
 server.get('/', function (req, res) {
