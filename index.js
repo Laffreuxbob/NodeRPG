@@ -10,12 +10,17 @@ const sha1 = require('sha1');
 const Elf = require('./src/js/Elf.js')
 const Human = require('./src/js/Human.js')
 
-let elf1 = new Elf("testelf")
-console.log(elf1)
-let h1 = new Human("testelf")
-console.log("-------------",h1)
-h1.usePotion()
-console.log("-------------",h1)
+const User = require('./src/js/User.js')
+
+// let elf1 = new Elf("testelf")
+// console.log(elf1)
+// let h1 = new Human("testelf")
+// console.log("-------------",h1);
+// h1.usePotion();
+// console.log("-------------",h1);
+
+let user1 = new User("log","pswd")
+console.log(user1)
 
 
 const bodyPost = require('body-parser'); // Necessaire a la lecture des data dans le body des requetes (post)
@@ -32,10 +37,10 @@ server.use((req, res, next) => {
 // BDD
 const mysql = require('mysql');
 const connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : '',
-    database : 'rpg'
+    host     : conf.hosturl,
+    user     : conf.DB_user,
+    password : conf.DB_pswd,
+    database : conf.DB_name
 });
 
 // Facon presque propre d'eviter le probleme de header CORS
@@ -126,12 +131,22 @@ server.delete('/deleteUser/:login', function (req, res) {
 });
 
 // Methode GET login pour la connection
-server.get('/login', function (req, res) {
-    const sql = "SELECT * FROM users WHERE login = " + req.login + "AND password = " + sha1(req.password)
+server.get('/login/:log/:psd', function (req, res) {
+
+    const {
+        params: {
+            log,
+            psd
+        }
+    } = req
+
+    const sql = "SELECT * FROM users WHERE 'login' = " + log + "AND 'password' = " + sha1(psd) + ";";
+    console.log(sql)
     connection.query(sql, function (err, results, fields) {
         if (err) throw err;
         if(!results){
             //pas de connexion
+            console.log("nope")
         }else{
             res.sendFile(__dirname + '/index.html'); // page d'accueil
         }
@@ -153,6 +168,8 @@ server.get('/test/:log/:psd', (req, res) => {
         
     })
 })
+
+
 // ------------------------------------------------CRUD WARRIORS
 
 server.get('/', function (req, res) {
@@ -262,5 +279,5 @@ server.post('/addWarrior',  (req, res) => {
 // });
 
 server.listen(conf.port, conf.hostname, function() {   
-    console.log('Server running at http://' + conf.hostname + ':' + conf.port + '/');
+    console.log('Server running at http://' + conf.hosturl + ':' + conf.port + '/');
 });
