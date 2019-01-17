@@ -1,9 +1,21 @@
 // Server
 const express = require('express');
+const server = express();
+
 const conf = require('./utils/config.js')
 const pkg = require('./package.json'); // Pour pouvoir lire les data du package.json
+const sha1 = require('sha1');
 
-const server = express();
+const bodyPost = require('body-parser'); // Necessaire a la lecture des data dans le body de la requete (post)
+
+server.use(bodyPost.json()); // support json encoded bodies
+server.use(bodyPost.urlencoded({ extended: false })); // support encoded bodies
+
+server.use((req, res, next) => {
+    res.header('Content-Type', 'application/json');
+    next();
+})
+
 
 
 // BDD
@@ -38,7 +50,45 @@ server.get('/version', (req, res) => {
     res.send(JSON.stringify(pkg.version));  
 })
 
-// Methode GET login
+// ------------------------------------------------CRUD USERS
+// Method POST add new user
+// curl -X POST -H "Content-Type: application/json" -d '{"newLogin":"NouveauProjet", "newPassword":"25-09-2019"}' http://localhost:3000/addUser
+// curl -d "newLogin=test&newPassword=test" -X POST http://localhost:3000/addUser
+server.post('/addUser',  function(req, res)  {
+    const data = req.body    // recuperation des donnees dans le body de la requete
+    console.log("REQ : ", data)
+    let newLogin = data.newLogin;
+    let newPassword = sha1(data.newPassword);
+    console.log(newLogin, newPassword)
+    let query = "INSERT INTO users (login, password) \
+    VALUES ('" + newLogin + "','" + newPassword + "');"
+    console.log(query);
+    connection.query(query, function (err, results, fields) {
+        if (err) throw err;
+        console.log("User successfully added");
+        res.status(200)
+        connection.end();
+        res.end();
+    })
+});
+
+// Method DELETE  user
+// curl -X DELETE http://127.0.0.1:3000/deleteUser/test
+server.delete('/deleteUser/:login', function (req, res) {
+    let query = "DELETE FROM users \
+    WHERE login = '" + req.params.login + "';";
+    console.log(query);
+    connection.query(query, function (err, results, fields) {
+        if (err) throw err;
+        console.log(results)
+        console.log("User successfully deleted");
+        res.status(403)
+        connection.end();
+        res.end();
+    })
+ });
+
+// Methode GET login pour la connection
 server.get('/login', function (req, res) {
     const sql = "SELECT * FROM users WHERE login = " + req.login + "AND password = " + req.password
     connection.query(sql, function (err, results, fields) {
@@ -70,8 +120,9 @@ server.get('/listWarriors', function (req, res) {
 server.post('/add',  (req, res) => {
     const data = req.body    // recuperation des donnees dans le body de la requete
     // attribution des nouvelles key_value  
-    let newName = data.name || "default_name"; 
-    let newFirstname = data.newFirstname || "firstName";
+    let newBreed = data.newBreed || "default_breed"; 
+    let newName = data.newName || "default_name"; 
+    let newWeaponType = data.newWeaponType || "firstName";
     let newPromo = data.promo || "default_promo";
     
     // creation du nouvel objet tache 
@@ -82,8 +133,16 @@ server.post('/add',  (req, res) => {
         "strength": 2,
         "itemPoints": 10,
     };
+
+
+    switch(newBreed){
+        case "human":
+        let newWarriorObject = new Human(newName)
+        console.log(newWarriorObject)
+    }
+
     
-    let query = "INSERT INTO students (nom, prenom, promo) \
+    let query = "INSERT INTO warrior (breed, name, hp, strength, weapon) \
     VALUES (" + newStudent.name + "," + newStudent.firstname + "," + newStudent.promo + ";)"
     connection.query(query, function (err, results, fields) {
         if (err) throw err;
