@@ -21,12 +21,19 @@
             <img
               src="../img/guerrier.jpg"
               alt=""
-              height="300px"
+              height="360px"
               width="360px"
+              class="humanPhoto"
             />
           </div>
           <div id="choice2" class="passwordLogin">
-            <img src="../img/elfe.png" alt="" height="300px" width="360px" />
+            <img
+              src="../img/elfe.png"
+              alt=""
+              height="360px"
+              width="360px"
+              class="elfPhoto"
+            />
           </div>
         </div>
       </div>
@@ -48,14 +55,34 @@
       document
         .getElementById("choice2")
         .removeChild(document.getElementById("choice2").children[0]);
+      // var newWeappon1 = document
+      //   .getElementById("choice1")
+      //   .children[0].createElement("div");
+      // newWeappon1.setAttribute("id", "containerCanvaP5Weapon1");
+      // newWeappon1.setAttribute("className", "canvaP5");
+
+      // var newWeappon2 = document
+      //   .getElementById("choice2")
+      //   .children[0].createElement("div");
+      // newWeappon2.setAttribute("id", "containerCanvaP5Weapon2");
+      // newWeappon2.setAttribute("className", "canvaP5");
     } else if (myBreed == 2) {
       document
         .getElementById("choice1")
         .removeChild(document.getElementById("choice1").children[0]);
+      var newWeappon1 = document
+        .getElementById("choice1")
+        .children[0].createElement("div");
+      newWeappon1.setAttribute("id", "containerCanvaP5Weapon1");
+      newWeappon1.setAttribute("className", "canvaP5");
       document
         .getElementById("choice2")
         .removeChild(document.getElementById("choice2").children[0]);
-      console.log("ok");
+      var newWeappon2 = document
+        .getElementById("choice2")
+        .children[0].createElement("div");
+      newWeappon2.setAttribute("id", "containerCanvaP5Weapon2");
+      newWeappon2.setAttribute("className", "canvaP5");
     }
   }
   var myChoice = "";
@@ -83,11 +110,4 @@
   //   document.getElementById("choix1");
   //   //choix 2
   //   document.getElementById("choix2");
-
-  
-
-  
-  
-
-
 </script>
