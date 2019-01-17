@@ -1,6 +1,6 @@
 class Elf extends Warrior{
-    constructor(name){
-        super(name);
+    constructor(name, user){
+        super(name, user);
         this.breed = "Elf"
         this.dodgingChance = .05;
         this.dealPoison = false;
