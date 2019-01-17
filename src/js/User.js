@@ -34,7 +34,6 @@ class User{
         let myWarrior = (warrior.breed = "human") ? new Human(warrior.name) : new Elf(warrior.name)  
         console.log(JSON.stringify(myWarrior))
     }
+};
 
-    
-    
-}
+module.exports = User
