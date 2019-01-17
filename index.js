@@ -112,9 +112,8 @@ server.delete('/deleteUser/:login', function (req, res) {
             connection.end();
             res.end();
         })
-    }
-   
- });
+    }  
+});
 
 // Methode GET login pour la connection
 server.get('/login', function (req, res) {
@@ -130,6 +129,9 @@ server.get('/login', function (req, res) {
     connection.end();
 })
 
+
+// ------------------------------------------------CRUD WARRIORS
+
 server.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
     connection.connect(function(err) {
@@ -141,37 +143,46 @@ server.get('/', function (req, res) {
   });
 
 // Methode GET liste des personnages enregistrés
+// curl http://127.0.0.1:3000/listWarriors
 server.get('/listWarriors', function (req, res) {
-    const sql = "SELECT * FROM warriors WHERE user = " + req.user;
+    const sql = "SELECT * FROM warriors";
     connection.query(sql, function (err, results, fields) {
-        if (err) throw err;
-        if(!results){
-            res.send("pas de personnage disponible");
-            connection.end();
+        if (err) throw err;        
+        if(results.length > 0){
+            if (results){
+                console.log(results);
+                res.send(results);
+            }
         }else{
-            res.send(results); // afficher la liste des personnage disponible
-            connection.end();
+            console.log("Empty list");
+            res.send("Pas de warrior disponible");
         }
     });
+    
 })
 
 // Methode GET selectionner un personnage
+// curl 127.0.0.1:3000/selectWarrior/bob
 server.get('/selectWarrior/:warriorSelect', function (req, res) {
-    const sql = "SELECT * FROM warriors WHERE " + req.params.warriorSelect;
+    const sql = "SELECT * FROM warriors WHERE name = '" + req.params.warriorSelect + "';";
     connection.query(sql, function (err, results, fields) {
         if (err) throw err;
-        if(!results){
-            res.send("Erreur de selection");
-            connection.end();
+        if(results.length > 0){
+            if (results){
+                console.log(results);
+                res.send(results);
+            }
         }else{
-            res.send(results); // afficher la liste des personnage disponible
-            console.log("FIGHT");
-            connection.end();
+            console.log("No name");
+            res.send("Erreur de selection");
         }
     });
 })
 
 // Method POST add new warrior
+/* INSERT INTO `warriors` (`id`, `breed`, `name`, `hp`, `strength`, `healingItem`, `dodgingChance`, `weaponEquiped`, `user`) 
+VALUES (NULL, 'human', 'bob', '10000000', '10000000', '0', '0', 'sword', 'bob');*/
+// curl -d "newBreed=elf&newName=Legolas" -X POST http://localhost:3000/addWarrior
 server.post('/addWarrior',  (req, res) => {
     const data = req.body    // recuperation des donnees dans le body de la requete
     let newBreed = data.newBreed || "default_breed"; 
@@ -194,7 +205,7 @@ server.post('/addWarrior',  (req, res) => {
         "weapon": newWeaponType,
         "user": newWarriorUser
     };
-
+    
     let newWarriorObject;
     switch(newBreed){
         case "human":
@@ -203,7 +214,7 @@ server.post('/addWarrior',  (req, res) => {
         case "elf":
         newWarriorObject = new Elf(newWarrior.name, newWarrior.user)
     }
-
+    
     let query = "INSERT INTO warrior (breed, name, hp, strength, healingItem, dodgingChance, weaponEquiped, user) \
     VALUES ('" + newBreed + "','" + newName + "');"
     connection.query(query, function (err, results, fields) {
