@@ -1,9 +1,9 @@
 class Warrior {
-    constructor(breed, name, hp, strength) {
+    constructor(breed, name) {
       this.breed = breed;
       this.name = name;
-      this.hp = hp;
-      this.strength = strength;
+      this.hp = 200;
+      this.strength = 20;
       this.itemPoints = 10
     }
 
