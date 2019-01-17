@@ -1,8 +1,8 @@
 class Human extends Soldier{
-    constructor(name, hp, strength, itemPoints, poisonState, healingItem){
-        super(name, hp, strength, itemPoints);
-        this.breed = "Human"
-        this.poisonState = poisonState;
+    constructor(name){
+        super(name);
+        this.breed = "Human";
+        this.poisonState = 0;
         this.healingItem = 0;
     }
 
@@ -37,6 +37,15 @@ class Human extends Soldier{
         if(this.healingItem > 0){
             this.healingItem -= 1;
             this.hp += 10;
+        }
+    }
+
+    useWeapon(weapon){
+        if(weapon.type === "swordShield"){
+            this.hp += sword.upHP;
+        }
+        if(weapon.type === "cleaver"){
+            this.strength += weapon.addStrength;
         }
     }
 }
