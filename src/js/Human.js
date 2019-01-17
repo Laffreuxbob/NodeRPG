@@ -1,4 +1,4 @@
-class Human extends Soldier{
+class Human extends Warrior{
     constructor(name, user){
         super(name, user);
         this.breed = "Human";
