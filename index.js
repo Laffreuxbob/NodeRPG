@@ -8,6 +8,8 @@ const pkg = require('./package.json'); // Pour pouvoir lire les data du package.
 const sha1 = require('sha1');
 
 const bodyPost = require('body-parser'); // Necessaire a la lecture des data dans le body des requetes (post)
+const server = express();
+const io = require('socket.io').listen(server); // Pour que socketio écoute notre serveur
 
 server.use(bodyPost.json()); // support json encoded bodies
 server.use(bodyPost.urlencoded({ extended: false })); // support encoded bodies
@@ -210,6 +212,19 @@ server.post('/addWarrior',  (req, res) => {
         res.status(200)
         res.send(newWarriorObject)
     })
+});
+
+io.sockets.on('connection',function(socket, player){
+
+    socket.on('new_player', function(player){
+        socket.player = player;
+        socket.broadcast.emit('new_player', player);
+    });
+
+    socket.on('dammage', function(dammage){
+        socket.broadcast.emit('dammage', {player : socket.player, dammage: dammage})
+    });
+
 });
 
 server.listen(conf.port, conf.hostname, function() {   

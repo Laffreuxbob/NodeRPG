@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script src="/node_modules/socket.io/lib/socket.js"></script>
+<script>
+  //connection à socket.io
+  var socket = io.connect("http://127.0.0.1:3000");
+
+  // nomme l'onglet avec le nom du personnage
+  document.title = player + " - " + document.title;
+
+  //Récupère en BDD le nom de mon warrior
+  socket.emit("new_player", player);
+
+  //Quand on reçoit des dommages on l'insère dans la page
+  socket.on("dammage", function(data) {
+    receivedDammage(data.player, data.dammage);
+  });
+
+  document.getElementById("attackButton").onclick(function() {
+    //var dammage = valeur de la BDD ;
+    socket.emit("dammage", dammage); // Transmet l'attaque
+    // receivedDammage(player, dammage); pour afficher les dégat envoyé
+  });
+</script>

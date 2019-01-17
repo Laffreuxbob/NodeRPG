@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>NodeRPG</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <body>
+    <div class="creationCharacter ">
+      <div class="inputLoginContent">
+        <div class="imgClass"><img src="../img/bouclier.png" alt="" /></div>
+        <h1 class="titleLogin">Elwin</h1>
+        <div id="areaOfChoice" class="inputLogin">
+          <div id="choice1" class="nameLogin">
+            <img
+              src="../img/guerrier.jpg"
+              alt=""
+              height="300px"
+              width="360px"
+            />
+          </div>
+          <div id="choice2" class="passwordLogin">
+            <img src="../img/elfe.png" alt="" height="300px" width="360px" />
+          </div>
+        </div>
+      </div>
+      <div class="loginButtonContent">
+        <div class="loginButton">
+          <button class="buttonLogin subscribeButton">Précédent</button>
+          <button class="buttonLogin logButton">Suivant</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  function choiceBreed() {
+    if (myBreed == 1) {
+      document
+        .getElementById("choice1")
+        .removeChild(document.getElementById("choice1").children[0]);
+      document
+        .getElementById("choice2")
+        .removeChild(document.getElementById("choice2").children[0]);
+    } else if (myBreed == 2) {
+      document
+        .getElementById("choice1")
+        .removeChild(document.getElementById("choice1").children[0]);
+      document
+        .getElementById("choice2")
+        .removeChild(document.getElementById("choice2").children[0]);
+      console.log("ok");
+    }
+  }
+  var myChoice = "";
+  document.getElementById("choice1").addEventListener("click", () => {
+    myBreed = 1;
+    console.log(document.getElementById("choice1").children[0]);
+
+    choiceBreed();
+    console.log(myBreed);
+  });
+  document.getElementById("choice2").addEventListener("click", () => {
+    myBreènued = 2;
+    console.log(myBreed);
+  });
+
+  var elf = "img";
+  var human = "img";
+  var sword = "";
+  var axe = "";
+  var dagger = "";
+  var stick = "";
+  var choice = "";
+
+  //   //choix 1
+  //   document.getElementById("choix1");
+  //   //choix 2
+  //   document.getElementById("choix2");
+
+  
+
+  
+  
+
+
+</script>
