@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "scss": "node-sass --watch src/scss -o src/css"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   "dependencies": {
     "express": "^4.16.4",
     "mysql": "^2.16.0",
+    "node-sass": "^4.11.0",
     "nodemon": "^1.18.9"
   }
 }

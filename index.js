@@ -52,6 +52,16 @@ server.get('/login', function (req, res) {
     connection.end();
 })
 
+server.get('/', function (req, res) {
+    res.sendFile(__dirname + '/index.html');
+    connection.connect(function(err) {
+      if (err) {
+        throw err;
+      }
+      console.log("Connected!");
+    });
+  });
+
 // Methode GET liste des personnages enregistrés
 server.get('/listWarriors', function (req, res) {
     const sql = "SELECT * FROM warrior WHERE user = " + req.user;

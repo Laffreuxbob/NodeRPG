@@ -1,17 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>NodeRPG</title>
-</head>
-<body>
-    <div class="logginContent">
-        <div class="inputContent">
-            
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/css/styles.css" />
+  </head>
+  <body>
+    <div class="loginContent">
+      <div class="inputLoginContent">
+        <div class="imgClass"><img src="./src/img/bouclier.png" alt="" /></div>
+        <h1 class="titleLogin">Elwin</h1>
+        <div class="inputLogin">
+          <div class="nameLogin">
+            <i class="iconLog material-icons sword">colorize</i>
+            <input id="newLogin" type="text" placeholder="Nom de compte" />
+          </div>
+          <div class="passwordLogin">
+            <i class="iconLog material-icons">lock_outline</i>
+            <input id=newPassword type="text" placeholder="Mot de passe" />
+          </div>
         </div>
-        div
+      </div>
+      <div class="loginButtonContent">
+        <div class="loginButton">
+          <button class="buttonLogin subscribeButton">Inscription</button>
+          <button class="buttonLogin logButton">Connexion</button>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
