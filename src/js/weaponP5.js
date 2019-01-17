@@ -13,10 +13,7 @@ let nbWeapon = 3
 
 	var weapon = 2;
 
-	var pots = function( p ) { 
-		var x = 100.0; 
-		var y = 100; 
-		var speed = 2.5; 
+	var pots = function( p ) {  
 		p.setup = function() {
 			p.createCanvas(widthCanvaP5, heightCanvaP5, 'webgl');
 		};
