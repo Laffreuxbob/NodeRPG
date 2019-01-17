@@ -1,6 +1,6 @@
 class Human extends Soldier{
-    constructor(name){
-        super(name);
+    constructor(name, user){
+        super(name, user);
         this.breed = "Human";
         this.poisonState = 0;
         this.healingItem = 0;
