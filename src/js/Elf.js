@@ -1,18 +1,30 @@
 class Elf extends Warrior{
-    constructor(breed, name, hp, strength, itemPoints){
-        super(name, hp, strength, itemPoints);
+    constructor(name){
+        super(name);
         this.breed = "Elf"
         this.dodgingChance = .05;
+        this.dealPoison = false;
     }
-
+    
     dealPoison(human){
-        human.poisonState = 3;
+        if(this.dealPoison){
+            human.poisonState = 3;
+        }
     }
-
+    
     attack(warrior){
         warrior.hp -= this.strength;
         if (warrior instanceof Human){
             this.dealPoison(warrior)
+        }
+    }
+    
+    useWeapon(weapon){
+        if(weapon.type === "dagger"){
+            this.dealPoison = true;
+        }
+        if(weapon.type === "staff"){
+            this.strength += weapon.addStrength;
         }
     }
 }
