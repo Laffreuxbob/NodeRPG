@@ -7,8 +7,24 @@ const conf = require('./utils/config.js')
 const pkg = require('./package.json'); // Pour pouvoir lire les data du package.json
 const sha1 = require('sha1');
 
+const Elf = require('./src/js/Elf.js')
+const Human = require('./src/js/Human.js')
+
+const User = require('./src/js/User.js')
+
+// let elf1 = new Elf("testelf")
+// console.log(elf1)
+// let h1 = new Human("testelf")
+// console.log("-------------",h1);
+// h1.usePotion();
+// console.log("-------------",h1);
+
+let user1 = new User("log","pswd")
+console.log(user1)
+
+
 const bodyPost = require('body-parser'); // Necessaire a la lecture des data dans le body des requetes (post)
-// const io = require('socket.io').listen(server); // Pour que socketio écoute notre serveur
+//const io = require('socket.io').listen(server); // Pour que socketio écoute notre serveur
 
 server.use(bodyPost.json()); // support json encoded bodies
 server.use(bodyPost.urlencoded({ extended: false })); // support encoded bodies
@@ -21,10 +37,10 @@ server.use((req, res, next) => {
 // BDD
 const mysql = require('mysql');
 const connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : '',
-    database : 'rpg'
+    host     : conf.hosturl,
+    user     : conf.DB_user,
+    password : conf.DB_pswd,
+    database : conf.DB_name
 });
 
 // Facon presque propre d'eviter le probleme de header CORS
@@ -115,17 +131,42 @@ server.delete('/deleteUser/:login', function (req, res) {
 });
 
 // Methode GET login pour la connection
-server.get('/login', function (req, res) {
-    const sql = "SELECT * FROM users WHERE login = " + req.login + "AND password = " + sha1(req.password)
+server.get('/login/:log/:psd', function (req, res) {
+
+    const {
+        params: {
+            log,
+            psd
+        }
+    } = req
+
+    const sql = "SELECT * FROM users WHERE 'login' = " + log + "AND 'password' = " + sha1(psd) + ";";
+    console.log(sql)
     connection.query(sql, function (err, results, fields) {
         if (err) throw err;
         if(!results){
             //pas de connexion
+            console.log("nope")
         }else{
             res.sendFile(__dirname + '/index.html'); // page d'accueil
         }
     });
     connection.end();
+})
+
+server.get('/test/:log/:psd', (req, res) => {
+    const {
+        params: {
+            log,
+            psd
+        }
+    } = req
+    const sql = "SELECT * FROM users WHERE 'login' = '" + log + "' AND 'password' = '" + sha1(psd) + "';";
+    console.log("SQL => ", sql)
+    connection.query(sql, (err, results, fields) => {
+        if (err) throw err;
+        
+    })
 })
 
 
@@ -214,8 +255,8 @@ server.post('/addWarrior',  (req, res) => {
         newWarriorObject = new Elf(newWarrior.name, newWarrior.user)
     }
     
-    let query = "INSERT INTO warrior (breed, name, hp, strength, healingItem, dodgingChance, weaponEquiped, user) \
-    VALUES ('" + newBreed + "','" + newName + "');"
+    let query = "INSERT INTO warriors (breed, name, hp, strength, healingItem, dodgingChance, weaponEquiped, user) \
+    VALUES ('" + newBreed + "','" + newName + "','50','50','2','0.2','cleaver','bob');"
     connection.query(query, function (err, results, fields) {
         if (err) throw err;
         console.log("Success add");
@@ -238,5 +279,5 @@ server.post('/addWarrior',  (req, res) => {
 // });
 
 server.listen(conf.port, conf.hostname, function() {   
-    console.log('Server running at http://' + conf.hostname + ':' + conf.port + '/');
+    console.log('Server running at http://' + conf.hosturl + ':' + conf.port + '/');
 });
