@@ -1,3 +1,5 @@
+console.log("WEAPON CHOICE P5 DISPLAY")
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 	// Variable de taille a regler par / pour le développeur frontend du projet
 	var widthCanvaP5 = 200;
@@ -7,16 +9,17 @@
 	var breed = "elf"
 
 	// Selection des deux (voire plus) div container des armes en 3D
-	var containerWeapon1 = document.getElementById("containerWeapon1");
-	containerWeapon1.style.width = widthCanvaP5 + "px";
-	containerWeapon1.style.height = heightCanvaP5 + "px";
+	var containerWeapon1 = document.getElementById("containerCanvaP5Weapon1");
+	//containerWeapon1.style.width = widthCanvaP5 + "px";
+	//containerWeapon1.style.height = heightCanvaP5 + "px";
 
-	var containerWeapon2 = document.getElementById("containerWeapon2");
-	containerWeapon2.style.width = widthCanvaP5 + "px";
-	containerWeapon2.style.height = heightCanvaP5 + "px";
+	var containerWeapon2 = document.getElementById("containerCanvaP5Weapon2");
+	//containerWeapon2.style.width = widthCanvaP5 + "px";
+	//containerWeapon2.style.height = heightCanvaP5 + "px";
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 	var swordP5 = function (p) {
+		console.log("setup sword")
 		p.setup = function() {
 			p.createCanvas(widthCanvaP5, heightCanvaP5, 'webgl');
 		};
@@ -148,10 +151,16 @@
 	}
 
 	// Voir pour un switch case : envisager plus de deux armes, plus de deux classes !
-	if(breed === "human"){
-		var weapon1_3D =  new p5(swordP5, 'containerWeapon1');
-		var weapon2_3D =  new p5(cleaverP5, 'containerWeapon2');
-	}else if(breed === "elf"){
-		var weapon1_3D =  new p5(daggerP5, 'containerWeapon1');
-		var weapon2_3D =  new p5(staffP5, 'containerWeapon2'); 
+	function displayWeapon3d(breed, id1, id2){
+		let container1 = document.getElementById(id1)
+		let container2 = document.getElementById(id2)
+		if(breed === "human"){
+			var weapon1_3D =  new p5(swordP5, container1);
+			var weapon2_3D =  new p5(cleaverP5, container2);
+		}else if(breed === "elf"){
+			var weapon1_3D =  new p5(daggerP5, 'containerCanvaP5Weapon1');
+			var weapon2_3D =  new p5(staffP5, 'containerCanvaP5Weapon2'); 
+		}
 	}
+
+

@@ -10,6 +10,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../cssFiles/styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
   </head>
   <body>
     <div class="creationCharacter ">
@@ -38,26 +39,37 @@
             />
           </div>
         </div>
+        <div id="choice2" class="passwordLogin">
+          <img
+          src="../imgServer/elfe.png"
+          alt=""
+          height="360px"
+          width="360px"
+          class="elfPhoto"
+          />
+        </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+<script src="../scriptServer/weaponChoice.js"></script>
 </html>
 <script>
   selectBreed();
   function displayWeapon() {
     document
-      .getElementById("choice1")
-      .removeChild(document.getElementById("choice1").children[0]);
+    .getElementById("choice1")
+    .removeChild(document.getElementById("choice1").children[0]);
     document
-      .getElementById("choice2")
-      .removeChild(document.getElementById("choice2").children[0]);
+    .getElementById("choice2")
+    .removeChild(document.getElementById("choice2").children[0]);
     var containerWeaponP5_1 = document.createElement("div");
     var newWeapon1 = document.getElementById("choice1");
     newWeapon1.appendChild(containerWeaponP5_1);
     var weapon1 = document.getElementById("choice1").children[0];
     weapon1.setAttribute("id", "containerCanvaP5Weapon1");
     weapon1.setAttribute("className", "canvaP5");
-
+    
     var containerWeaponP5_2 = document.createElement("div");
     var newWeapon2 = document.getElementById("choice2");
     newWeapon2.appendChild(containerWeaponP5_2);
@@ -65,7 +77,7 @@
     weapon2.setAttribute("id", "containerCanvaP5Weapon2");
     weapon2.setAttribute("className", "canvaP5");
     // si nous voulons afficher les armes
-
+    
     if (myBreed == "human") {
       weapon1.innerHTML = "SWORD";
       weapon2.innerHTML = "CLEAVER";
@@ -83,12 +95,13 @@
   //ajoute le choix de l'arme au warrior
   function selectWeapon(myBreed, myWeapon1, myWeapon2) {
     document
-      .getElementById("choice1")
-      .children[0].addEventListener("click", weapon_select1);
+    .getElementById("choice1")
+    .children[0].addEventListener("click", weapon_select1);
     document
-      .getElementById("choice2")
-      .children[0].addEventListener("click", weapon_select2);
+    .getElementById("choice2")
+    .children[0].addEventListener("click", weapon_select2);
     function weapon_select1() {
+      console.log('prompt ON')
       var name = prompt("Saisissez votre nom :");
       weapon = myWeapon1;
       newWarrior = {
@@ -96,7 +109,32 @@
         weapon: weapon,
         name: name
       };
+      console.log('prompt OFF')
+
+      const newbody = {
+        "breed": newWarrior.breed,
+        "name": newWarrior.name
+      }
+
+      console.log("BODY ==> ", newbody)
+
+      // fetch pour enregistrer le nouveau warrior en bdd
+      fetch('http://127.0.0.1:3000/creationCharacter.html', {
+        method:'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body:JSON.stringify({"newBreed": newWarrior.breed, "newName": newWarrior.name})
+      })
+      .then(response => {return (response.status === 200) ? response.json() : Promise.reject("Nom deja existant");})
+      .then( () => {
+        newLoginInput.value = "";
+        newPasswordInput.value = "";
+      })
+      .catch(err => console.log("erreur : ", err)) // POPUP
       console.log(newWarrior);
+      fetch
       document
         .getElementById("choice2")
         .removeEventListener("click", weapon_select2);
@@ -145,8 +183,8 @@
       console.log(newWarrior);
       displayWeapon();
       document
-        .getElementById("choice1")
-        .removeEventListener("click", breedHuman);
+      .getElementById("choice1")
+      .removeEventListener("click", breedHuman);
     }
   }
 </script>

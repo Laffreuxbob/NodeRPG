@@ -15,10 +15,13 @@ const Human = require('./src/js/Human.js')
 
 const User = require('./src/js/User.js')
 
+// const p5 = require('p5')
+
 console.log(__dirname)
 server.use('/cssFiles', express.static(__dirname + '/src/css'));
 server.use('/imgServer', express.static(__dirname + '/src/img'));
 server.use('/pageServer', express.static(__dirname + '/src/pages'));
+server.use('/scriptServer', express.static(__dirname + '/src/js'));
 
 // let elf1 = new Elf("testelf")
 // console.log(elf1)
@@ -230,7 +233,7 @@ server.get('/selectWarrior/:warriorSelect', function (req, res) {
 // Method POST add new warrior
 /* INSERT INTO `warriors` (`id`, `breed`, `name`, `hp`, `strength`, `healingItem`, `dodgingChance`, `weaponEquiped`, `user`) 
 VALUES (NULL, 'human', 'bob', '10000000', '10000000', '0', '0', 'sword', 'bob');*/
-// curl -d "newBreed=elf&newName=Legolas" -X POST http://localhost:3000/addWarrior
+// curl -d "newBreed=elf&newName=Legolas" -X POST http://localhost:3000/creationCharacter.html
 server.post('/creationCharacter.html',  (req, res) => {
     const data = req.body    // recuperation des donnees dans le body de la requete
     let newBreed = data.newBreed || "default_breed"; 
