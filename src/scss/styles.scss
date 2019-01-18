@@ -212,4 +212,52 @@ html {
       }
     }
   }
+  .loginButtonContent {
+    display: flex;
+    flex: 30%;
+    align-self: center;
+    width: 100%;
+
+    .loginButton {
+      align-self: center;
+      width: 100%;
+      padding-left: 40px;
+      padding-right: 40px;
+      align-content: center;
+      display: flex;
+      .buttonLogin {
+        color: white;
+        background: #2e8ca6;
+        border: none;
+        height: 60px;
+        border-radius: 15px;
+        width: 100%;
+        font-size: xx-large;
+        margin-bottom: 30px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgba(46, 140, 166, 0.733);
+        }
+
+        &:active {
+          background-color: rgb(46, 129, 168);
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      .subscribeButton {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      .logButton {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
 }
