@@ -14,7 +14,9 @@
   <body>
     <div class="creationCharacter ">
       <div class="inputLoginContent">
-        <div class="imgClass"><img src="../imgServer/bouclier.png" alt="" /></div>
+        <div class="imgClass">
+          <img src="../imgServer/bouclier.png" alt="" />
+        </div>
         <h1 class="titleLogin">Elwin</h1>
         <div id="areaOfChoice" class="inputLogin">
           <div id="choice1" class="nameLogin">
@@ -98,6 +100,7 @@
       document
         .getElementById("choice2")
         .removeEventListener("click", weapon_select2);
+      goToListCharacter();
     }
     function weapon_select2() {
       var name = prompt("Saisissez votre nom :");
@@ -105,13 +108,18 @@
       newWarrior = {
         breed: myBreed,
         weapon: weapon,
-        name :name
+        name: name
       };
       console.log(newWarrior);
       document
         .getElementById("choice1")
         .removeEventListener("click", weapon_select1);
+      goToListCharacter();
     }
+  }
+
+  function goToListCharacter() {
+    document.location.href="http://127.0.0.1:3000/pageServer/listCharacter.html"
   }
   //ajoute le choix de la race au warrior
   function selectBreed() {
