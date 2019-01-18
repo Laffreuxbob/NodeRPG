@@ -1,11 +1,11 @@
-*{
+* {
   box-sizing: border-box;
 }
 html {
   display: flex;
   height: 100%;
   width: 100%;
-  background-image: url("../img/login-background.jpg");
+  background-image: url("../imgServer/login-background.jpg");
   background-size: 100% 100%;
   overflow: hidden;
 
@@ -173,7 +173,7 @@ html {
       height: 340px;
       justify-content: space-around;
       padding-left: 40px;
-      padding-right:40px;
+      padding-right: 40px;
 
       .nameLogin {
         border-top-right-radius: 0;
@@ -182,8 +182,7 @@ html {
       .passwordLogin {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
-
-      }  
+      }
       div {
         height: 360px;
         width: 100%;
@@ -192,20 +191,20 @@ html {
         border-radius: 15px;
         background-color: white;
         cursor: pointer;
-        :nth-child(1n+0){
+        :nth-child(1n + 0) {
           opacity: 0.5;
-          &:hover{
-            opacity:1;
+          &:hover {
+            opacity: 1;
           }
         }
         &:active {
           background-color: rgb(46, 129, 168);
         }
-        .humanPhoto{
+        .humanPhoto {
           border-top-left-radius: 3%;
           border-bottom-left-radius: 3%;
         }
-        .elfPhoto{
+        .elfPhoto {
           border-top-right-radius: 3%;
           border-bottom-right-radius: 3%;
         }
@@ -260,4 +259,85 @@ html {
       }
     }
   }
+}
+
+.listCharacter {
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3%;
+  height: 500px;
+  width: 460px;
+  display: flex;
+  flex-direction: column;
+
+  .inputLoginContent {
+    flex: 70%;
+    .imgClass {
+      display: flex;
+      margin-top: -75px;
+
+      img {
+        height: 150px;
+        width: 150px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+    .titleLogin {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 40px;
+    }
+    .inputLogin {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+
+      div {
+        display: flex;
+        width: 100%;
+        border: none;
+        background-color: white;
+        
+        div {
+          border: 1px solid black;
+        }
+
+        .sword {
+          transform: rotate(180deg);
+        }
+        .iconLog {
+          font-size: 40px;
+          height: 40px;
+          margin-top: auto;
+          margin-bottom: auto;
+        }
+      }
+      
+    }
+  }
+  .addCharacter {
+    color: white;
+    background: #2e8ca6;
+    border: none;
+    height: 60px;
+    border-radius: 15px;
+    width: 100%;
+    font-size: xx-large;
+    margin-bottom: 30px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(46, 140, 166, 0.733);
+    }
+
+    &:active {
+      background-color: rgb(46, 129, 168);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+  
 }

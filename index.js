@@ -192,7 +192,7 @@ server.post('/login', (req, res) => {
 
 // Methode GET liste des personnages enregistrés
 // curl http://127.0.0.1:3000/listWarriors
-server.get('/listWarriors', function (req, res) {
+server.get('/listCharacter.html', function (req, res) {
     const sql = "SELECT * FROM warriors";
     connection.query(sql, function (err, results, fields) {
         if (err) throw err;        
