@@ -1,3 +1,5 @@
+console.log("WEAPON CHOICE P5 DISPLAY")
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 	// Variable de taille a regler par / pour le développeur frontend du projet
 	var widthCanvaP5 = 200;
@@ -17,6 +19,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 	var swordP5 = function (p) {
+		console.log("setup sword")
 		p.setup = function() {
 			p.createCanvas(widthCanvaP5, heightCanvaP5, 'webgl');
 		};
@@ -159,5 +162,5 @@
 			var weapon2_3D =  new p5(staffP5, 'containerCanvaP5Weapon2'); 
 		}
 	}
-	
+
 
