@@ -37,77 +37,208 @@
           </div>
         </div>
       </div>
-      <div class="loginButtonContent">
-        <div class="loginButton">
-          <button class="buttonLogin subscribeButton">Précédent</button>
-          <button class="buttonLogin logButton">Suivant</button>
-        </div>
-      </div>
     </div>
   </body>
 </html>
 <script>
-  function choiceBreed() {
-    if (myBreed == 1) {
-      document
-        .getElementById("choice1")
-        .removeChild(document.getElementById("choice1").children[0]);
-      document
-        .getElementById("choice2")
-        .removeChild(document.getElementById("choice2").children[0]);
-      // var newWeappon1 = document
-      //   .getElementById("choice1")
-      //   .children[0].createElement("div");
-      // newWeappon1.setAttribute("id", "containerCanvaP5Weapon1");
-      // newWeappon1.setAttribute("className", "canvaP5");
+  selectBreed();
+  function display(type) {
+    console.log("start");
+    document
+      .getElementById("choice1")
+      .removeChild(document.getElementById("choice1").children[0]);
+    document
+      .getElementById("choice2")
+      .removeChild(document.getElementById("choice2").children[0]);
+    var containerWeaponP5_1 = document.createElement("div");
+    var newWeapon1 = document.getElementById("choice1");
+    newWeapon1.appendChild(containerWeaponP5_1);
+    var weapon1 = document.getElementById("choice1").children[0];
+    weapon1.setAttribute("id", "containerCanvaP5Weapon1");
+    weapon1.setAttribute("className", "canvaP5");
 
-      // var newWeappon2 = document
-      //   .getElementById("choice2")
-      //   .children[0].createElement("div");
-      // newWeappon2.setAttribute("id", "containerCanvaP5Weapon2");
-      // newWeappon2.setAttribute("className", "canvaP5");
-    } else if (myBreed == 2) {
-      document
-        .getElementById("choice1")
-        .removeChild(document.getElementById("choice1").children[0]);
-      var newWeappon1 = document
-        .getElementById("choice1")
-        .children[0].createElement("div");
-      newWeappon1.setAttribute("id", "containerCanvaP5Weapon1");
-      newWeappon1.setAttribute("className", "canvaP5");
-      document
-        .getElementById("choice2")
-        .removeChild(document.getElementById("choice2").children[0]);
-      var newWeappon2 = document
-        .getElementById("choice2")
-        .children[0].createElement("div");
-      newWeappon2.setAttribute("id", "containerCanvaP5Weapon2");
-      newWeappon2.setAttribute("className", "canvaP5");
+    var containerWeaponP5_2 = document.createElement("div");
+    var newWeapon2 = document.getElementById("choice2");
+    newWeapon2.appendChild(containerWeaponP5_2);
+    var weapon2 = document.getElementById("choice2").children[0];
+    weapon2.setAttribute("id", "containerCanvaP5Weapon2");
+    weapon2.setAttribute("className", "canvaP5");
+    if (type == "weapon") {
+      if (myBreed == "human") {
+        weapon1.innerHTML = "SWORD";
+        weapon2.innerHTML = "CLEAVER";
+        myWeapon1 = "sword";
+        myWeapon2 = "cleaver";
+        selectWeapon(myBreed, myWeapon1, myWeapon2);
+      } else if (myBreed == "elf") {
+        weapon1.innerHTML = "DAGGER";
+        weapon2.innerHTML = "STAFF";
+        myWeapon1 = "dagger";
+        myWeapon2 = "staff";
+        selectWeapon(myBreed, myWeapon1, myWeapon2);
+      }
+    }
+    if (type == "stats") {
+      console.log("typeStats : ", weapon);
+      if (myBreed == "human") {
+        console.log("humain");
+        if (weapon == myWeapon1) {
+          console.log(weapon);
+          weapon1.innerHTML = "Strength";
+          weapon2.innerHTML = "HealingItem";
+        } else if (weapon == myWeapon2) {
+          weapon1.innerHTML = "Strength";
+          weapon2.innerHTML = "hp";
+        }
+      }
+      if (myBreed == "elf") {
+        console.log("elfe");
+        if (weapon == myWeapon1) {
+          weapon1.innerHTML = "dealPoison";
+          weapon2.innerHTML = "dodgingChance";
+        } else if (weapon == myWeapon2) {
+          weapon1.innerHTML = "Strength";
+          weapon2.innerHTML = "dodgingChance";
+        }
+      }
+      incrementStats();
+      myStat1 = tableStats[0];
+      myStat2 = tableStats[1];
+      selectStats(myBreed, weapon, myStat1, myStat2);
+    }
+    function incrementStats(myBreed, weapon) {
+      statsAll = 10;
+      myStat1 = "";
+      myStat2 = "";
+      function statsUp1() {
+        if (myBreed == "elf" && weapon == myWeapon1) {
+          myStat1 += 2;
+          statsAll -= 1;
+        } else {
+          myStat1 += 1;
+          statsAll -= 1;
+        }
+      }
+      function statsUp2() {
+        if (myBreed == "elf") {
+          myStat2 += 0.5;
+          statsAll -= 1;
+        } else {
+          myStat2 += 1;
+          statsAll -= 1;
+        }
+      }
+      while (statsAll > 0) {
+        document.getElementById("choice1").addEventListener("click", statsUp1);
+        document.getElementById("choice2").addEventListener("click", statsUp2);
+      }
+      document.getElementById("choice1").removeEventListener("click", statsUp1);
+      document.getElementById("choice2").removeEventListener("click", statsUp2);
+      let tableStats = [myStat1, myStat2];
+      return tableStats;
     }
   }
-  var myChoice = "";
-  document.getElementById("choice1").addEventListener("click", () => {
-    myBreed = 1;
-    console.log(document.getElementById("choice1").children[0]);
-
-    choiceBreed();
-    console.log(myBreed);
-  });
-  document.getElementById("choice2").addEventListener("click", () => {
-    myBreènued = 2;
-    console.log(myBreed);
-  });
-
-  var elf = "img";
-  var human = "img";
-  var sword = "";
-  var axe = "";
-  var dagger = "";
-  var stick = "";
-  var choice = "";
-
-  //   //choix 1
-  //   document.getElementById("choix1");
-  //   //choix 2
-  //   document.getElementById("choix2");
+  function selectStats(myBreed, weapon, myStat1, myStat2) {
+    if (myBreed == "human" && weapon == myWeapon1) {
+      strength = myStat1;
+      healingItem = myStat2;
+      newWarrior = {
+        breed: myBreed,
+        weapon: weapon,
+        strength: 20 + strentgh,
+        healingItem: healingItem
+      };
+      console.log(newWarrior);
+    }
+    if (myBreed == "human" && weapon == myWeapon2) {
+      strength = myStat1;
+      hp = myStat2;
+      newWarrior = {
+        breed: myBreed,
+        weapon: weapon,
+        strength: 20 + strentgh,
+        hp: 100 + hp
+      };
+      console.log(newWarrior);
+    }
+    if (myBreed == "elf" && weapon == myWeapon1) {
+      dealPoison = myStat1;
+      dodgingChance = myStat2;
+      newWarrior = {
+        breed: myBreed,
+        weapon: weapon,
+        dealPoison: 5 + dealPoison,
+        dodgingChance: 0.1 + dodgingChance
+      };
+      console.log(newWarrior);
+    }
+    if (myBreed == "elf" && weapon == myWeapon2) {
+      strength = myStat1;
+      dodgingChance = myStat2;
+      newWarrior = {
+        breed: myBreed,
+        weapon: weapon,
+        strength: 20 + strentgh,
+        dodgingChance: 0.1 + dodgingChance
+      };
+      console.log(newWarrior);
+    }
+  }
+  function selectWeapon(myBreed, myWeapon1, myWeapon2) {
+    document
+      .getElementById("choice1")
+      .children[0].addEventListener("click", weapon_select1);
+    document
+      .getElementById("choice2")
+      .children[0].addEventListener("click", weapon_select2);
+    function weapon_select1() {
+      weapon = myWeapon1;
+      newWarrior = {
+        breed: myBreed,
+        weapon: weapon
+      };
+      console.log(newWarrior);
+      document
+        .getElementById("choice2")
+        .removeEventListener("click", weapon_select2);
+      display("stats");
+    }
+    function weapon_select2() {
+      weapon = myWeapon2;
+      newWarrior = {
+        breed: myBreed,
+        weapon: weapon
+      };
+      console.log(newWarrior);
+      document
+        .getElementById("choice1")
+        .removeEventListener("click", weapon_select1);
+      display("stats");
+    }
+  }
+  function selectBreed() {
+    let newWarrior = {};
+    document.getElementById("choice1").addEventListener("click", breedHuman);
+    function breedHuman() {
+      myBreed = "human";
+      newWarrior = {
+        breed: myBreed
+      };
+      console.log(newWarrior);
+      display("weapon");
+      document.getElementById("choice2").removeEventListener("click", breedElf);
+    }
+    document.getElementById("choice2").addEventListener("click", breedElf);
+    function breedElf() {
+      myBreed = "elf";
+      newWarrior = {
+        breed: myBreed
+      };
+      console.log(newWarrior);
+      display("weapon");
+      document
+        .getElementById("choice1")
+        .removeEventListener("click", breedHuman);
+    }
+  }
 </script>
