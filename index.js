@@ -104,20 +104,23 @@ server.post('/addUser',  function(req, res)  {
     let newPassword = sha1(data.newPassword);
     // On vérifie que le login n'existe pas deja
     let queryTest = "SELECT * FROM users WHERE login = '" + newLogin + "'";
+    //console.log("QUERY TEST => ", queryTest)
     connection.query(queryTest, function (err, results, fields) {
-        console.log("results : ", results)
-        console.log("type : ", typeof results)
-        if(results != null){
+        if(err) throw err;
+        // console.log("results => ", results)
+        // console.log("resultsL => ", results.length)
+        if(results.length > 0){
+            console.log('add nope')
             res.send("Login already exists")
         }else{
-            let query = "INSERT INTO users (login, password) \
+            console.log('add yes')
+            let query = "INSERT INTO users (login, pswd) \
             VALUES ('" + newLogin + "','" + newPassword + "');"
-            console.log(query);
+            console.log("QUERY add user => ", query);
             connection.query(query, function (err, results, fields) {
                 if (err) throw err;
                 console.log("User successfully added");
                 res.status(200)
-                connection.end();
                 res.end();
             })
         }
