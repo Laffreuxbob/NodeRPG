@@ -275,20 +275,6 @@ server.post('/creationCharacter.html',  (req, res) => {
         res.send(newWarriorObject)
     })
 });
-
-// io.sockets.on('connection',function(socket, player){
-
-//     socket.on('new_player', function(player){
-//         socket.player = player;
-//         socket.broadcast.emit('new_player', player);
-//     });
-
-//     socket.on('dammage', function(dammage){
-//         socket.broadcast.emit('dammage', {player : socket.player, dammage: dammage})
-//     });
-
-// });
-
 server.listen(conf.port, conf.hostname, function() {   
     console.log('Server running at http://' + conf.hosturl + ':' + conf.port + '/');
 });

@@ -13,6 +13,10 @@ html {
     flex-direction: row;
     height: 100%;
     width: 100%; }
+    html body #fight {
+      height: 100%;
+      width: 100%;
+      background-image: url("../imgServer/duel.jpg"); }
 
 .loginContent {
   margin: auto;

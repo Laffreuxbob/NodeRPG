@@ -23,11 +23,13 @@
             <div class="characterBreed">elf</div>
             <div class="characterWeapon">dagger</div>
             <button class="deleteCharacter">Supprimer</button>
-            <button class="fight">Combat</button>
           </div>
         </div>
         <button id="createCharacter" class="addCharacter">
           Créer un guerrier
+        </button>
+        <button id="fightButton">
+            Combat !
         </button>
       </div>
     </div>
@@ -36,5 +38,8 @@
 <script>
   document.getElementById("createCharacter").onclick= () => {
     document.location.href="http://127.0.0.1:3000/pageServer/creationCharacter.html"
+  }
+  document.getElementById("fightButton").onclick= () => {
+    document.location.href="http://127.0.0.1:3000/pageServer/areaOfFight.html"
   }
 </script>
