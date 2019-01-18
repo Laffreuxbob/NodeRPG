@@ -30,7 +30,7 @@
     <div class="loginButtonContent">
       <div class="loginButton">
         <button class="buttonLogin subscribeButton" onclick="registration()">Inscription</button>
-        <button class="buttonLogin logButton">Connexion</button>
+        <button class="buttonLogin logButton" onclick="connection()">Connexion</button>
       </div>
     </div>
   </div>
@@ -45,7 +45,6 @@
       "newLogin": newLoginInput, 
       "newPassword": newPasswordInput
     };
-    
     fetch('http://127.0.0.1:3000/addUser', {
       method:'post',
       headers: {
@@ -60,7 +59,29 @@
       newPasswordInput.value = "";
     })
     .catch(err => console.log("erreur : ", err)) // POPUP
-    
+  }
+
+  function connection() {
+    const loginInput = document.getElementById("loginHome").value;
+    const passwordInput = document.getElementById("passwordHome").value;
+    let bodyConnectUser = {
+      "login": loginInput, 
+      "password": passwordInput
+    };
+    fetch('http://127.0.0.1:3000/login', {
+      method:'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify({"login": loginInput, "password": passwordInput})
+    })
+    .then(response => {return (response.status === 200) ? response.json() : Promise.reject("Nom deja existant");})
+    .then( () => {
+      newLoginInput.value = "";
+      newPasswordInput.value = "";
+    })
+    .catch(err => console.log("erreur : ", err)) // POPUP
   }
 </script>
 </html>
