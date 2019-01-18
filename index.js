@@ -15,6 +15,10 @@ const Human = require('./src/js/Human.js')
 
 const User = require('./src/js/User.js')
 
+console.log(__dirname)
+server.use('/cssFiles', express.static(__dirname + '/src/css'));
+server.use('/imgServer', express.static(__dirname + '/src/img'));
+
 // let elf1 = new Elf("testelf")
 // console.log(elf1)
 // let h1 = new Human("testelf")
