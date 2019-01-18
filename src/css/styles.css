@@ -149,9 +149,9 @@ html {
         border-radius: 15px;
         background-color: white;
         cursor: pointer; }
-        .creationCharacter .inputLoginContent .inputLogin div :nth-child(1n+0) {
-          opacity: 0.9; }
-          .creationCharacter .inputLoginContent .inputLogin div :nth-child(1n+0):hover {
+        .creationCharacter .inputLoginContent .inputLogin div :nth-child(1n + 0) {
+          opacity: 0.5; }
+          .creationCharacter .inputLoginContent .inputLogin div :nth-child(1n + 0):hover {
             opacity: 1; }
         .creationCharacter .inputLoginContent .inputLogin div:active {
           background-color: #2e81a8; }
@@ -195,3 +195,60 @@ html {
       .creationCharacter .loginButtonContent .loginButton .logButton {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0; }
+
+.listCharacter {
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3%;
+  height: 500px;
+  width: 460px;
+  display: flex;
+  flex-direction: column; }
+  .listCharacter .inputLoginContent {
+    flex: 70%; }
+    .listCharacter .inputLoginContent .imgClass {
+      display: flex;
+      margin-top: -75px; }
+      .listCharacter .inputLoginContent .imgClass img {
+        height: 150px;
+        width: 150px;
+        margin-left: auto;
+        margin-right: auto; }
+    .listCharacter .inputLoginContent .titleLogin {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 40px; }
+    .listCharacter .inputLoginContent .inputLogin {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around; }
+      .listCharacter .inputLoginContent .inputLogin div {
+        display: flex;
+        width: 100%;
+        border: none;
+        background-color: white; }
+        .listCharacter .inputLoginContent .inputLogin div div {
+          border: 1px solid black; }
+        .listCharacter .inputLoginContent .inputLogin div .sword {
+          transform: rotate(180deg); }
+        .listCharacter .inputLoginContent .inputLogin div .iconLog {
+          font-size: 40px;
+          height: 40px;
+          margin-top: auto;
+          margin-bottom: auto; }
+  .listCharacter .addCharacter {
+    color: white;
+    background: #2e8ca6;
+    border: none;
+    height: 60px;
+    border-radius: 15px;
+    width: 100%;
+    font-size: xx-large;
+    margin-bottom: 30px;
+    cursor: pointer; }
+    .listCharacter .addCharacter:hover {
+      background-color: rgba(46, 140, 166, 0.733); }
+    .listCharacter .addCharacter:active {
+      background-color: #2e81a8; }
+    .listCharacter .addCharacter:focus {
+      outline: none; }
