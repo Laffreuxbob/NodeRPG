@@ -19,20 +19,41 @@
         <div class="inputLogin">
           <div class="nameLogin">
             <i class="iconLog material-icons sword">colorize</i>
-            <input id="newLogin" type="text" placeholder="Nom de compte" />
+            <input id="loginHome" type="text" placeholder="Nom de compte" />
           </div>
           <div class="passwordLogin">
             <i class="iconLog material-icons">lock_outline</i>
-            <input id=newPassword type="text" placeholder="Mot de passe" />
+            <input id="passwordHome" type="text" placeholder="Mot de passe" />
           </div>
         </div>
       </div>
       <div class="loginButtonContent">
         <div class="loginButton">
-          <button class="buttonLogin subscribeButton">Inscription</button>
+          <button class="buttonLogin subscribeButton" onclick="registration()">Inscription</button>
           <button class="buttonLogin logButton">Connexion</button>
         </div>
       </div>
     </div>
   </body>
+
+  <script>
+  function registration(){
+    const newLoginInput = document.getElementById("loginHome").value;
+    const newPasswordInput = document.getElementById("passwordHome").value;
+    console.log(newLoginInput, newPasswordInput)
+    fetch('http://127.0.0.1:3000/addUser/', {
+        method:'post',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body:JSON.stringify({
+            "newLogin": newLoginInput, 
+            "newName": newPasswordInput
+        })
+        })
+        .then(response => {return (response.status === 200) ? response.json() : Promise.reject("Nom deja existant");})
+        .catch(err => console.log("erreur : ", err)) // POPUP
+  }
+  </script>
 </html>
