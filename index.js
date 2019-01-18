@@ -18,6 +18,7 @@ const User = require('./src/js/User.js')
 console.log(__dirname)
 server.use('/cssFiles', express.static(__dirname + '/src/css'));
 server.use('/imgServer', express.static(__dirname + '/src/img'));
+server.use('/pageServer', express.static(__dirname + '/src/pages'));
 
 // let elf1 = new Elf("testelf")
 // console.log(elf1)
@@ -60,18 +61,7 @@ server.use(allowCrossDomain);
 // Methode GET pour charger la premiere page d'accueil
 server.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
-    // connection.connect(function(err) {
-    //   if (err) {
-    //     throw err;
-    //   }
-    //   console.log("Connected!");
-    // });
   });
-
-  server.get('/', function (req, res) {
-    res.sendFile(__dirname + '/test.html');
- });
-
 
 // Methode GET pour recuperer la version du projet
 // curl http://127.0.0.1:8080/version
@@ -186,7 +176,8 @@ server.post('/login', (req, res) => {
         if(results.length > 0){
             if (results){
                 console.log("You are now connected !");
-                res.send("You are now connected !");
+                //res.send("You are now connected !");
+                res.sendFile(__dirname + '/pageServer/creationCharacter.html');
             }
         }else{
             console.log("Wrong login or password");
