@@ -1,39 +1,96 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>NodeRPG</title>
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../css/styles.css" />
-  </head>
-  <body>
-    <div class="listCharacter ">
-      <div class="inputLoginContent">
-        <div class="imgClass"><img src="../img/bouclier.png" alt="" /></div>
-        <h1 class="titleLogin">Elwin</h1>
-        <div class="inputLogin">
-          
-          <div class="character">
-            <div class="characterName">Jean</div>
-            <div class="characterBreed">elf</div>
-            <div class="characterWeapon">dagger</div>
-            <button class="deleteCharacter">Supprimer</button>
-            <button class="fight">Combat</button>
-          </div>
-        </div>
-        <button id="createCharacter" class="addCharacter">
-          Créer un guerrier
-        </button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>NodeRPG</title>
+  <link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+  />
+  <link rel="stylesheet" href="../cssFiles/styles.css" />
+</head>
+<body>
+  <div class="listCharacter " id="listCharacter">
+    <div class="inputLoginContent">
+      <div class="imgClass"><img src="../imgServer/bouclier.png" alt="" /></div>
+      <h1 class="titleLogin">Elwin</h1>
+      <div class="inputLogin" id="fullListWarriors">
+        
+        <!-- Remplissage dynamique depuis la bdd -->
+        
       </div>
+      <button id="createCharacter" class="addCharacter">
+        Créer un guerrier
+      </button>
     </div>
-  </body>
+  </div>
+</body>
 </html>
 <script>
+  function getWarriorList(){
+    console.log("getwarriorlist")
+    fetch('http://127.0.0.1:3000/listCharacter.html', {method:'get'})
+    .then(data =>  data.json())
+    .then(results => displayWarriorList(results))
+    .catch(err => {
+      console.log('Error occured with fetching ressources : ' + err)
+    })
+  }
+  
+  function displayWarriorList(obj){
+    console.log("diplaywarriorlist")
+    console.log(obj)
+    const listContainer = document.getElementById('fullListWarriors')
+    obj.forEach(element => {
+      
+      console.log(element.name)
+      
+      let unitWarriorList = document.createElement('div');
+      
+      let divName = document.createElement('div');
+      divName.setAttribute('class', 'characterName' )
+      divName.innerHTML = element.name;
+      
+      let divBreed = document.createElement('div');
+      divBreed.setAttribute('class', 'characterBreed' )
+      divBreed.innerHTML = element.breed;
+      
+      let divWeapon = document.createElement('div');
+      divWeapon.setAttribute('class', 'characterWeapon' )
+      divWeapon.innerHTML = element.weaponEquiped;
+      
+      let deleteButton = document.createElement("button")
+      deleteButton.setAttribute("class", "deleteCharacter")
+      deleteButton.setAttribute("value", element.id)
+      deleteButton.innerHTML = "Supprimer"
+      
+      console.log(deleteButton)
+      
+      deleteButton.addEventListener("click", deleteWarriorBack)
+      
+      unitWarriorList.appendChild(divName)
+      unitWarriorList.appendChild(divBreed)
+      unitWarriorList.appendChild(divWeapon)
+      unitWarriorList.appendChild(deleteButton)
+      
+      listContainer.appendChild(unitWarriorList)
+    });
+    
+    
+  }
+  
+  function deleteWarriorBack(item, url) {
+    return fetch("/deleteWArrior/" + this.value, {
+      method: 'delete'
+    })
+    .then(response => response.json());
+  }
+  
+  
+  
+  getWarriorList()
   document.getElementById("createCharacter").onclick= () => {
     document.location.href="http://127.0.0.1:3000/pageServer/creationCharacter.html"
   }
