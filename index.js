@@ -64,7 +64,7 @@ server.use(allowCrossDomain);
 // Methode GET pour charger la premiere page d'accueil
 server.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
-  });
+});
 
 // Methode GET pour recuperer la version du projet
 // curl http://127.0.0.1:8080/version
@@ -274,6 +274,23 @@ server.post('/creationCharacter.html',  (req, res) => {
         res.status(200)
         res.send(newWarriorObject)
     })
+});
+
+// Method DELETE  user
+// curl -X DELETE http://127.0.0.1:3000/deleteUser/test
+server.delete('/deleteWarrior/:id', function (req, res) {
+    let deleteId = req.params.id;
+    let query = "DELETE FROM warriors \
+    WHERE id = '" + deleteId + "';";
+    console.log(query);
+    connection.query(query, function (err, results, fields) {
+        if (err) throw err;
+        console.log(results)
+        console.log("Warrior successfully deleted");
+        res.status(403)
+        connection.end();
+        res.end();
+    })  
 });
 
 // io.sockets.on('connection',function(socket, player){
