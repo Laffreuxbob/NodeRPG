@@ -19,8 +19,8 @@ const User = require('./src/js/User.js')
 // h1.usePotion();
 // console.log("-------------",h1);
 
-let user1 = new User("log","pswd")
-console.log(user1)
+// let user1 = new User("log","pswd")
+// console.log(user1)
 
 
 const bodyPost = require('body-parser'); // Necessaire a la lecture des data dans le body des requetes (post)
@@ -63,7 +63,7 @@ server.get('/version', (req, res) => {
     }
     res.status(200);
     console.log('Version: ' + pkg.version);
-    res.send(JSON.stringify(pkg.version));  
+    res.send("Version : " + JSON.stringify(pkg.version));  
 })
 
 // Methode GET all users
@@ -132,16 +132,13 @@ server.delete('/deleteUser/:login', function (req, res) {
 
 // Methode GET login pour la connection
 server.get('/login/:log/:psd', function (req, res) {
-
     const {
         params: {
             log,
             psd
         }
     } = req
-
     const sql = "SELECT * FROM users WHERE 'login' = " + log + "AND 'password' = " + sha1(psd) + ";";
-    console.log(sql)
     connection.query(sql, function (err, results, fields) {
         if (err) throw err;
         if(!results){
@@ -154,18 +151,24 @@ server.get('/login/:log/:psd', function (req, res) {
     connection.end();
 })
 
-server.get('/test/:log/:psd', (req, res) => {
-    const {
-        params: {
-            log,
-            psd
-        }
-    } = req
-    const sql = "SELECT * FROM users WHERE 'login' = '" + log + "' AND 'password' = '" + sha1(psd) + "';";
-    console.log("SQL => ", sql)
-    connection.query(sql, (err, results, fields) => {
+// Methode POST login pour la connection
+// curl -d "login=bob&password=bob" -X POST http://localhost:3000/login
+server.post('/login', (req, res) => {
+    const data = req.body;
+    const sql = "SELECT * FROM users WHERE login = '" + data.login + "' AND pswd = '" + sha1(data.password) + "';"
+    console.log(sql);
+    connection.query(sql, function (err, results, fields) {
         if (err) throw err;
-        
+        console.log("RESULTS ==> ", results);
+        if(results.length > 0){
+            if (results){
+                console.log("You are now connected !");
+                res.send("You are now connected !");
+            }
+        }else{
+            console.log("Wrong login or password");
+            res.send("Wrong login or password");
+        }
     })
 })
 
