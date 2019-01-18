@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
 }
+
 html {
   display: flex;
   height: 100%;
@@ -14,6 +15,12 @@ html {
     flex-direction: row;
     height: 100%;
     width: 100%;
+    #fight {
+      margin-top:auto;
+      margin-bottom:auto;
+      margin-left:auto;
+      margin-right:auto;
+    }
   }
 }
 
@@ -298,7 +305,7 @@ html {
         width: 100%;
         border: none;
         background-color: white;
-        
+
         div {
           border: 1px solid black;
         }
@@ -313,7 +320,6 @@ html {
           margin-bottom: auto;
         }
       }
-      
     }
   }
   .addCharacter {
@@ -339,5 +345,4 @@ html {
       outline: none;
     }
   }
-  
 }

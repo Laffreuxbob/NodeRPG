@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
+        <button id="fightButton">
+            Combat !
+        </button>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -93,5 +96,8 @@
   getWarriorList()
   document.getElementById("createCharacter").onclick= () => {
     document.location.href="http://127.0.0.1:3000/pageServer/creationCharacter.html"
+  }
+  document.getElementById("fightButton").onclick= () => {
+    document.location.href="http://127.0.0.1:3000/pageServer/areaOfFight.html"
   }
 </script>
