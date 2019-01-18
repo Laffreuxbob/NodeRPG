@@ -15,6 +15,11 @@ const Human = require('./src/js/Human.js')
 
 const User = require('./src/js/User.js')
 
+console.log(__dirname)
+server.use('/cssFiles', express.static(__dirname + '/src/css'));
+server.use('/imgServer', express.static(__dirname + '/src/img'));
+server.use('/pageServer', express.static(__dirname + '/src/pages'));
+
 // let elf1 = new Elf("testelf")
 // console.log(elf1)
 // let h1 = new Human("testelf")
@@ -56,18 +61,7 @@ server.use(allowCrossDomain);
 // Methode GET pour charger la premiere page d'accueil
 server.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
-    // connection.connect(function(err) {
-    //   if (err) {
-    //     throw err;
-    //   }
-    //   console.log("Connected!");
-    // });
   });
-
-  server.get('/', function (req, res) {
-    res.sendFile(__dirname + '/test.html');
- });
-
 
 // Methode GET pour recuperer la version du projet
 // curl http://127.0.0.1:8080/version
@@ -104,20 +98,23 @@ server.post('/addUser',  function(req, res)  {
     let newPassword = sha1(data.newPassword);
     // On vérifie que le login n'existe pas deja
     let queryTest = "SELECT * FROM users WHERE login = '" + newLogin + "'";
+    //console.log("QUERY TEST => ", queryTest)
     connection.query(queryTest, function (err, results, fields) {
-        console.log("results : ", results)
-        console.log("type : ", typeof results)
-        if(results != null){
+        if(err) throw err;
+        // console.log("results => ", results)
+        // console.log("resultsL => ", results.length)
+        if(results.length > 0){
+            console.log('add nope')
             res.send("Login already exists")
         }else{
-            let query = "INSERT INTO users (login, password) \
+            console.log('add yes')
+            let query = "INSERT INTO users (login, pswd) \
             VALUES ('" + newLogin + "','" + newPassword + "');"
-            console.log(query);
+            console.log("QUERY add user => ", query);
             connection.query(query, function (err, results, fields) {
                 if (err) throw err;
                 console.log("User successfully added");
                 res.status(200)
-                connection.end();
                 res.end();
             })
         }
@@ -179,7 +176,8 @@ server.post('/login', (req, res) => {
         if(results.length > 0){
             if (results){
                 console.log("You are now connected !");
-                res.send("You are now connected !");
+                //res.send("You are now connected !");
+                res.sendFile(__dirname + '/pageServer/creationCharacter.html');
             }
         }else{
             console.log("Wrong login or password");

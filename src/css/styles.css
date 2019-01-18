@@ -5,7 +5,7 @@ html {
   display: flex;
   height: 100%;
   width: 100%;
-  background-image: url("../img/login-background.jpg");
+  background-image: url("../imgServer/login-background.jpg");
   background-size: 100% 100%;
   overflow: hidden; }
   html body {
