@@ -7,6 +7,9 @@ const conf = require('./utils/config.js')
 const pkg = require('./package.json'); // Pour pouvoir lire les data du package.json
 const sha1 = require('sha1');
 
+const bodyPost = require('body-parser'); // Necessaire a la lecture des data dans le body des requetes (post)
+
+
 const Elf = require('./src/js/Elf.js')
 const Human = require('./src/js/Human.js')
 
@@ -22,15 +25,13 @@ const User = require('./src/js/User.js')
 // let user1 = new User("log","pswd")
 // console.log(user1)
 
-
-const bodyPost = require('body-parser'); // Necessaire a la lecture des data dans le body des requetes (post)
 //const io = require('socket.io').listen(server); // Pour que socketio écoute notre serveur
 
 server.use(bodyPost.json()); // support json encoded bodies
 server.use(bodyPost.urlencoded({ extended: false })); // support encoded bodies
 
 server.use((req, res, next) => {
-    res.header('Content-Type', 'application/json');
+    res.header('Content-Type', 'text/html');
     next();
 })
 
@@ -51,6 +52,21 @@ const allowCrossDomain = function(req, res, next) {
     next();
 }
 server.use(allowCrossDomain);
+
+// Methode GET pour charger la premiere page d'accueil
+server.get('/', function (req, res) {
+    res.sendFile(__dirname + '/index.html');
+    // connection.connect(function(err) {
+    //   if (err) {
+    //     throw err;
+    //   }
+    //   console.log("Connected!");
+    // });
+  });
+
+  server.get('/', function (req, res) {
+    res.sendFile(__dirname + '/test.html');
+ });
 
 
 // Methode GET pour recuperer la version du projet
@@ -175,15 +191,6 @@ server.post('/login', (req, res) => {
 
 // ------------------------------------------------CRUD WARRIORS
 
-server.get('/', function (req, res) {
-    res.sendFile(__dirname + '/index.html');
-    connection.connect(function(err) {
-      if (err) {
-        throw err;
-      }
-      console.log("Connected!");
-    });
-  });
 
 // Methode GET liste des personnages enregistrés
 // curl http://127.0.0.1:3000/listWarriors
