@@ -233,7 +233,7 @@ server.get('/selectWarrior/:warriorSelect', function (req, res) {
 // Method POST add new warrior
 /* INSERT INTO `warriors` (`id`, `breed`, `name`, `hp`, `strength`, `healingItem`, `dodgingChance`, `weaponEquiped`, `user`) 
 VALUES (NULL, 'human', 'bob', '10000000', '10000000', '0', '0', 'sword', 'bob');*/
-// curl -d "newBreed=elf&newName=Legolas" -X POST http://localhost:3000/addWarrior
+// curl -d "newBreed=elf&newName=Legolas" -X POST http://localhost:3000/creationCharacter.html
 server.post('/creationCharacter.html',  (req, res) => {
     const data = req.body    // recuperation des donnees dans le body de la requete
     let newBreed = data.newBreed || "default_breed"; 
