@@ -1,47 +1,47 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>NodeRPG</title>
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../cssFiles/styles.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
-  </head>
-  <body>
-    <div class="creationCharacter ">
-      <div class="inputLoginContent">
-        <div class="imgClass">
-          <img src="../imgServer/bouclier.png" alt="" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>NodeRPG</title>
+  <link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+  />
+  <link rel="stylesheet" href="../cssFiles/styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
+</head>
+<body>
+  <div class="creationCharacter ">
+    <div class="inputLoginContent">
+      <div class="imgClass">
+        <img src="../imgServer/bouclier.png" alt="" />
+      </div>
+      <h1 class="titleLogin">Elwin</h1>
+      <div id="areaOfChoice" class="inputLogin">
+        <div id="choice1" class="nameLogin">
+          <img
+          src="../imgServer/guerrier.jpg"
+          alt=""
+          height="360px"
+          width="360px"
+          class="humanPhoto"
+          />
         </div>
-        <h1 class="titleLogin">Elwin</h1>
-        <div id="areaOfChoice" class="inputLogin">
-          <div id="choice1" class="nameLogin">
-            <img
-              src="../imgServer/guerrier.jpg"
-              alt=""
-              height="360px"
-              width="360px"
-              class="humanPhoto"
-            />
-          </div>
-          <div id="choice2" class="passwordLogin">
-            <img
-              src="../imgServer/elfe.png"
-              alt=""
-              height="360px"
-              width="360px"
-              class="elfPhoto"
-            />
-          </div>
+        <div id="choice2" class="passwordLogin">
+          <img
+          src="../imgServer/elfe.png"
+          alt=""
+          height="360px"
+          width="360px"
+          class="elfPhoto"
+          />
         </div>
       </div>
     </div>
   </div>
+</div>
 </body>
 <script src="../scriptServer/weaponChoice.js"></script>
 </html>
@@ -59,7 +59,9 @@
     newWeapon1.appendChild(containerWeaponP5_1);
     var weapon1 = document.getElementById("choice1").children[0];
     weapon1.setAttribute("id", "containerCanvaP5Weapon1");
-    weapon1.setAttribute("className", "canvaP5");
+    weapon1.setAttribute("className", "canvaP5 classcontainerCanvaP5Weapon1");
+    
+    displayWeapon3d('human', 'classcontainerCanvaP5Weapon1', 'classcontainerCanvaP5Weapon1')
     
     var containerWeaponP5_2 = document.createElement("div");
     var newWeapon2 = document.getElementById("choice2");
@@ -101,14 +103,14 @@
         name: name
       };
       console.log('prompt OFF')
-
+      
       const newbody = {
         "breed": newWarrior.breed,
         "name": newWarrior.name
       }
-
+      
       console.log("BODY ==> ", newbody)
-
+      
       // fetch pour enregistrer le nouveau warrior en bdd
       fetch('http://127.0.0.1:3000/creationCharacter.html', {
         method:'post',
@@ -127,8 +129,8 @@
       console.log(newWarrior);
       fetch
       document
-        .getElementById("choice2")
-        .removeEventListener("click", weapon_select2);
+      .getElementById("choice2")
+      .removeEventListener("click", weapon_select2);
       goToListCharacter();
     }
     function weapon_select2() {
@@ -141,12 +143,12 @@
       };
       console.log(newWarrior);
       document
-        .getElementById("choice1")
-        .removeEventListener("click", weapon_select1);
+      .getElementById("choice1")
+      .removeEventListener("click", weapon_select1);
       goToListCharacter();
     }
   }
-
+  
   function goToListCharacter() {
     document.location.href="http://127.0.0.1:3000/pageServer/listCharacter.html"
   }
