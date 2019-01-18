@@ -15,10 +15,13 @@ const Human = require('./src/js/Human.js')
 
 const User = require('./src/js/User.js')
 
+// const p5 = require('p5')
+
 console.log(__dirname)
 server.use('/cssFiles', express.static(__dirname + '/src/css'));
 server.use('/imgServer', express.static(__dirname + '/src/img'));
 server.use('/pageServer', express.static(__dirname + '/src/pages'));
+server.use('/scriptServer', express.static(__dirname + '/src/js'));
 
 // let elf1 = new Elf("testelf")
 // console.log(elf1)
